@@ -3,7 +3,8 @@ const app = express();
 var admin = require("firebase-admin");
 const path = require('path');
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);;
+const FIREBASE_SERVICE_ACCOUNT = process.env.FIREBASE_SERVICE_ACCOUNT;
+const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT);
 
 // Initialize Firebase Admin SDK (you need to set up your credentials)
 admin.initializeApp({
