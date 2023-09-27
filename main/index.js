@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { initializeApp, credential } = require("firebase-admin/app");
+const { initializeApp, credential } = require("firebase-admin");
 const path = require('path');
 
 var serviceAccount = require(path.join(__dirname, 'svAcc', 'serviceAccount.json'));
