@@ -1,13 +1,13 @@
-const admin = require("firebase-admin/app");
 const express = require('express');
 const app = express();
+const { initializeApp, credential } = require("firebase-admin/app");
 const path = require('path');
 
 var serviceAccount = require(path.join(__dirname, 'svAcc', 'serviceAccount.json'));
 
 // Initialize Firebase Admin SDK (you need to set up your credentials)
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+initializeApp({
+  credential: credential.cert(serviceAccount),
   databaseURL: "https://boxdots-ba3ca-default-rtdb.firebaseio.com"
 });
 
