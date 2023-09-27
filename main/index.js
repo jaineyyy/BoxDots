@@ -1,4 +1,4 @@
-var admin = require("firebase-admin");
+const admin = require("firebase-admin/app");
 const express = require('express');
 const app = express();
 const path = require('path');
