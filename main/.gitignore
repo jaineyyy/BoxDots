@@ -1,6 +1,6 @@
 package-lock.json
 # Ignore the svAcc folder
-svAcc/*
+config/*
 
 node_modules/*
 .idea/*
