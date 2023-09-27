@@ -1,0 +1,14 @@
+{
+  "name": "nodes",
+  "version": "1.0.0",
+  "description": "custom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "boxDots",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^11.10.1"
+  }
+}
