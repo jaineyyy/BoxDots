@@ -26,7 +26,7 @@ app.get('/getUrl', (req, res) => {
   const link = req.query.link; // Get the link from the request
   
   // Construct a query to find the urlResult with the given link
-  const urlsRef = admin.database().ref('urls');
+  const urlsRef = admin.database().ref('urlResult');
   urlsRef.orderByChild('url').equalTo(link).once('value')
     .then(snapshot => {
       if (snapshot.exists()) {
@@ -35,7 +35,7 @@ app.get('/getUrl', (req, res) => {
         const linkResult = snapshot.child(linkKey).child('urlResult').val();
         res.json({ urlResult: linkResult });
       } else {
-        res.status(404).json({ error: 'User not found' });
+        res.status(404).json({ error: 'Link not found' });
       }
     })
     .catch(error => {
