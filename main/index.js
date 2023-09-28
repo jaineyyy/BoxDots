@@ -12,17 +12,8 @@ admin.initializeApp({
   databaseURL: "https://boxdots-ba3ca-default-rtdb.firebaseio.com"
 });
 
-// As an admin, the app has access to read and write all data, regardless of Security Rules
-var db = admin.database();
-var ref = db.ref("urls");
-
-ref.on("value", function(snapshot) {
-  var data = snapshot.val();
-  console.log(data);
-});
-
 // Define an endpoint to retrieve a specific child data
-app.get('/getUrl', (req, res) => {
+app.get('/url', (req, res) => {
   const link = req.query.link; // Get the link from the request
   
   // Construct a query to find the urlResult with the given link
@@ -44,7 +35,7 @@ app.get('/getUrl', (req, res) => {
 });
 
 // Start the API server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1000;
 app.listen(PORT, () => {
   console.log(`API server is running on port ${PORT}`);
 });
