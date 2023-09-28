@@ -17,7 +17,7 @@ app.get('/url', (req, res) => {
   const link = req.query.link; // Get the link from the request
   
   // Construct a query to find the urlResult with the given link
-  const urlsRef = admin.database().ref('urlResult');
+  const urlsRef = admin.database().ref('urls');
   urlsRef.orderByChild('url').equalTo(link).once('value')
     .then(snapshot => {
       if (snapshot.exists()) {
