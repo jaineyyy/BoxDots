@@ -50,7 +50,7 @@ app.get('/url', validateApiKey, (req, res) => {
     });
 });
 app.post('/addUrl', validateApiKey, (req, res) => {
-  const link = req.body.link;
+  const link = req.query.link;
   const linkResult = req.body.extraData;
 
   //Get the ref from the database
