@@ -27,6 +27,7 @@ const validateApiKey = (req, res, next) => {
   }
 };
 
+app.use(express.json());
 
 // Define an endpoint to retrieve a specific child data
 app.get('/url', validateApiKey, (req, res) => {
