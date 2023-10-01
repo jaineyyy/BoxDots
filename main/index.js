@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 var admin = require("firebase-admin");
-const path = require('path');
 
 const FIREBASE_SERVICE_ACCOUNT = process.env.FIREBASE_SERVICE_ACCOUNT;
 const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT);
@@ -26,12 +25,35 @@ app.get('/url', (req, res) => {
         const linkResult = snapshot.child(linkKey).child('urlResult').val();
         res.json({ urlResult: linkResult });
       } else {
-        res.status(404).json({ error: 'Link not found' });
+        res.status(404).json({ urlResult: 'Link not found' });
       }
     })
     .catch(error => {
       res.status(500).json({ error: 'Server error' });
     });
+});
+app.post('/addUrl', (req, res) => {
+  const link = req.query.link;
+  const linkResult = req.body.extraData;
+
+  //Get the ref from the database
+  const addUrlRef = admin.database().ref('urls');
+
+  // Push the new link to the local database
+  const newLinkRef = addUrlRef.push();
+  newLinkRef.set({
+    url: link,
+    urlResult: linkResult
+  })
+  .then(() => {
+    console.log('URL added to the Firebase Realtime Database');
+    res.status(200).json({ message: 'URL with its result is added to the database' });
+  })
+ .catch((error) => {
+    console.error('Error adding URL to the Firebase Realtime Database:', error);
+    res.status(500).json({ error: 'Server error' });
+  });
+  
 });
 
 // Start the API server
