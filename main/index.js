@@ -11,8 +11,25 @@ admin.initializeApp({
   databaseURL: "https://boxdots-ba3ca-default-rtdb.firebaseio.com"
 });
 
+// Asks for API key
+const api_key = process.env.API_KEY;
+
+// Middleware to validate the API key
+const validateApiKey = (req, res, next) => {
+  const apiKey = req.get('Authorization'); // Assume API key is in the 'Authorization' header
+
+  if (api_key === apiKey) {
+    // API key is valid, proceeds to the route
+    next();
+  } else {
+    // API key is invalid, unauthorized
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
+
+
 // Define an endpoint to retrieve a specific child data
-app.get('/url', (req, res) => {
+app.get('/url', validateApiKey, (req, res) => {
   const link = req.query.link; // Get the link from the request
   
   // Construct a query to find the urlResult with the given link
@@ -32,7 +49,7 @@ app.get('/url', (req, res) => {
       res.status(500).json({ error: 'Server error' });
     });
 });
-app.post('/addUrl', (req, res) => {
+app.post('/addUrl', validateApiKey, (req, res) => {
   const link = req.query.link;
   const linkResult = req.body.extraData;
 
