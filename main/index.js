@@ -42,7 +42,7 @@ app.get('/url', validateApiKey, (req, res) => {
         const linkResult = snapshot.child(linkKey).child('urlResult').val();
         res.json({ urlResult: linkResult });
       } else {
-        res.status(404).json({ urlResult: 'Link not found' });
+        res.json({ urlResult: 'Link not found' });
       }
     })
     .catch(error => {
