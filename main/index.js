@@ -29,6 +29,11 @@ const validateApiKey = (req, res, next) => {
 
 app.use(express.json());
 
+// This check the availability of BoxDots API
+app.get('/status', validateApiKey, (req, res) => {
+  res.status(200).json({ status: 'API is ready' });
+});
+
 // Define an endpoint to retrieve a specific child data
 app.get('/url', validateApiKey, (req, res) => {
   const link = req.query.link; // Get the link from the request
@@ -75,7 +80,7 @@ app.post('/addUrl', validateApiKey, (req, res) => {
 });
 
 // Start the API server
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`API server is running on port ${PORT}`);
 });
